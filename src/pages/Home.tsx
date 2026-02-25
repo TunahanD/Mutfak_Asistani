@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 relative overflow-hidden">
-      {/* Dekoratif Arka Plan Elemanları */}
+      
       <div className="absolute top-10 left-10 text-9xl opacity-5 pointer-events-none rotate-12">🥕</div>
       <div className="absolute bottom-10 right-10 text-9xl opacity-5 pointer-events-none -rotate-12">🍳</div>
       <div className="absolute top-1/3 right-1/4 text-8xl opacity-5 pointer-events-none rotate-45">🥦</div>

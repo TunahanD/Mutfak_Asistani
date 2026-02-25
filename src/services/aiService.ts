@@ -1,20 +1,15 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import type { Product } from '../interfaces/types';
 
-/**
- * API Anahtarı Konfigürasyonu
- * Güvenlik nedeniyle bu anahtarın .env dosyasında saklanması önerilir.
- * Kullanıcı tarafından manuel olarak doldurulmalıdır.
- */
+
 const API_KEY = 'API - KEY yazılacak!';
 
 // Google Generative AI istemcisini başlat
 const genAI = new GoogleGenerativeAI(API_KEY);
 
-/**
- * Yapay Zeka Tarif Önerisi Arayüzü
- * AI tarafından döndürülen JSON yapısını tanımlar.
- */
+
+//Yapay Zeka Tarif Önerisi Arayüzü => AI tarafından döndürülen JSON yapısını tanımlar.
+
 export interface RecipeRecommendation {
   recipeName: string;
   description: string;
@@ -34,7 +29,6 @@ export const getRecipeSuggestion = async (
   type: 'çorba' | 'yemek' | 'tatlı'
 ): Promise<RecipeRecommendation | null> => {
   try {
-    // Gemini-2.5-Flash modelini seç (En güncel ve hızlı versiyon)
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     // Ürün listesini metin formatına dönüştür
@@ -70,8 +64,7 @@ export const getRecipeSuggestion = async (
     const response = await result.response;
     const text = response.text();
 
-    // JSON temizleme ve parse etme
-    // İlk '{' karakterinden son '}' karakterine kadar olan kısmı al
+    // JSON temizleme ve parse etme => İlk '{' karakterinden son '}' karakterine kadar olan kısmı al
     const firstBrace = text.indexOf('{');
     const lastBrace = text.lastIndexOf('}');
     

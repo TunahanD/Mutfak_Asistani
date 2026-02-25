@@ -15,7 +15,7 @@ const Inventory = () => {
   
   // Form State Yönetimi
   const [name, setName] = useState('');
-  const [amount, setAmount] = useState<string>(''); // Girdi alanı için string kullanımı daha rahattır
+  const [amount, setAmount] = useState<string>(''); 
   const [unit, setUnit] = useState<Unit>('adet');
   const [category, setCategory] = useState<Category>('Diğer');
 

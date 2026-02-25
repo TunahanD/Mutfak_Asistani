@@ -14,7 +14,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/inventory" element={<Inventory />} />
             <Route path="/recipe" element={<Recipe />} />
-            {/* Diğer rotalar buraya gelecek */}
+            {}
           </Routes>
         </div>
       </Router>

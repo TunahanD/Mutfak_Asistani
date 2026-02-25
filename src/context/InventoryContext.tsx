@@ -1,6 +1,7 @@
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Product } from '../interfaces/types';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
+import type { Product } from '../interfaces/types';
 
 interface InventoryContextType {
   products: Product[];

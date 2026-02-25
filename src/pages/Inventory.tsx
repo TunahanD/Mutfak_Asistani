@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
 import { useInventory } from '../context/InventoryContext';
-import { Product, UNIT_OPTIONS, CATEGORY_OPTIONS, Unit, Category } from '../interfaces/types';
+import { UNIT_OPTIONS, CATEGORY_OPTIONS } from '../interfaces/types';
+import type { Product, Unit, Category } from '../interfaces/types';
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
 

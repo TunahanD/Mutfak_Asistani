@@ -4,12 +4,20 @@ import { Link } from 'react-router-dom';
 import { getRecipeSuggestion } from '../services/aiService';
 import type { RecipeRecommendation } from '../services/aiService';
 
+/**
+ * Tarif Öneri Sayfası
+ * Kullanıcının dolabındaki malzemelere göre yapay zeka destekli tarif önerileri aldığı sayfadır.
+ */
 const Recipe = () => {
-  const { products } = useInventory();
+  const { products, updateProduct, removeProduct } = useInventory(); // updateProduct ve removeProduct eklendi
   const [loading, setLoading] = useState(false);
   const [recipe, setRecipe] = useState<RecipeRecommendation | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  /**
+   * Seçilen türe göre yapay zekadan tarif ister.
+   * @param type - İstenilen yemek türü (çorba, yemek, tatlı)
+   */
   const handleGetRecipe = async (type: 'çorba' | 'yemek' | 'tatlı') => {
     setLoading(true);
     setError(null);
@@ -36,6 +44,48 @@ const Recipe = () => {
     }
   };
 
+  /**
+   * "Tarifi Yaptım" butonuna tıklandığında çalışır.
+   * Tarifteki malzemeleri envanterden düşer.
+   */
+  const handleCookRecipe = () => {
+    if (!recipe) return;
+
+    if (!window.confirm('Bu tarifi yaptığınızı onaylıyor musunuz? Kullanılan malzemeler stoktan düşülecektir.')) {
+      return;
+    }
+
+    let updatedCount = 0;
+
+    // Tarifteki her malzeme için döngü
+    recipe.ingredients.forEach((ingredient) => {
+      // Envanterde bu malzemeyi ismine göre bul (Büyük/küçük harf duyarsız arama yapılabilir ama AI promptu birebir eşleşme istiyor)
+      const productInInventory = products.find(
+        (p) => p.name.toLowerCase() === ingredient.name.toLowerCase()
+      );
+
+      if (productInInventory) {
+        const newAmount = productInInventory.amount - ingredient.amount;
+
+        if (newAmount <= 0) {
+          // Eğer miktar 0 veya altına düşerse ürünü tamamen sil
+          removeProduct(productInInventory.id);
+        } else {
+          // Miktarı güncelle
+          updateProduct(productInInventory.id, { amount: newAmount });
+        }
+        updatedCount++;
+      }
+    });
+
+    if (updatedCount > 0) {
+      alert(`Afiyet olsun! ${updatedCount} adet malzeme stoğunuzdan güncellendi.`);
+      setRecipe(null); // Tarifi ekrandan temizle
+    } else {
+      alert('Stokta eşleşen malzeme bulunamadı veya güncelleme yapılamadı.');
+    }
+  };
+
   return (
     <div className="container mx-auto p-4">
       <Link to="/" className="text-blue-500 hover:underline mb-4 inline-block">&larr; Ana Sayfa</Link>
@@ -45,6 +95,7 @@ const Recipe = () => {
         Dolabındaki {products.length} çeşit malzeme ile sana özel tarifler önerelim.
       </p>
 
+      {/* Kategori Seçim Butonları */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <button
           onClick={() => handleGetRecipe('çorba')}
@@ -69,6 +120,7 @@ const Recipe = () => {
         </button>
       </div>
 
+      {/* Yükleniyor Göstergesi */}
       {loading && (
         <div className="text-center py-10">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
@@ -76,6 +128,7 @@ const Recipe = () => {
         </div>
       )}
 
+      {/* Hata Mesajı */}
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
           <strong className="font-bold">Hata: </strong>
@@ -83,6 +136,7 @@ const Recipe = () => {
         </div>
       )}
 
+      {/* Tarif Kartı */}
       {recipe && (
         <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
           <div className="bg-blue-600 text-white p-6">
@@ -120,8 +174,8 @@ const Recipe = () => {
           
           <div className="bg-gray-50 p-4 text-center border-t">
             <button 
-              className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded transition"
-              onClick={() => alert('Bu özellik yakında eklenecek: Malzemeleri stoktan düş!')}
+              className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded transition transform hover:scale-105"
+              onClick={handleCookRecipe}
             >
               ✅ Tarifi Yaptım (Stoktan Düş)
             </button>

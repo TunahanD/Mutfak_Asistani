@@ -1,24 +1,33 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useInventory } from '../context/InventoryContext';
 import { UNIT_OPTIONS, CATEGORY_OPTIONS } from '../interfaces/types';
 import type { Product, Unit, Category } from '../interfaces/types';
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
 
+/**
+ * Envanter (Dolap) Sayfası
+ * Kullanıcının dolabındaki ürünleri listelediği, ekleyip çıkarabildiği ana yönetim sayfasıdır.
+ */
 const Inventory = () => {
   const { products, addProduct, removeProduct } = useInventory();
+  
+  // Form State Yönetimi
   const [name, setName] = useState('');
-  const [amount, setAmount] = useState<string>(''); // Changed to string for input
+  const [amount, setAmount] = useState<string>(''); // Girdi alanı için string kullanımı daha rahattır
   const [unit, setUnit] = useState<Unit>('adet');
   const [category, setCategory] = useState<Category>('Diğer');
 
+  /**
+   * Yeni ürün ekleme formunun gönderilmesi
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !amount) return;
 
     const newProduct: Product = {
-      id: uuidv4(),
+      id: uuidv4(), // Benzersiz ID oluştur
       name,
       amount: parseFloat(amount),
       unit,
@@ -26,6 +35,8 @@ const Inventory = () => {
     };
 
     addProduct(newProduct);
+    
+    // Formu temizle
     setName('');
     setAmount('');
     setUnit('adet');

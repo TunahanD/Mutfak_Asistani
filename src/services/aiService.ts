@@ -34,8 +34,8 @@ export const getRecipeSuggestion = async (
   type: 'çorba' | 'yemek' | 'tatlı'
 ): Promise<RecipeRecommendation | null> => {
   try {
-    // Gemini-1.5-Flash modelini seç (Daha hızlı ve güncel)
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    // Gemini-2.5-Flash modelini seç (En güncel ve hızlı versiyon)
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     // Ürün listesini metin formatına dönüştür
     const inventoryList = products
@@ -85,6 +85,7 @@ export const getRecipeSuggestion = async (
     return JSON.parse(jsonString) as RecipeRecommendation;
   } catch (error) {
     console.error('AI Servisi Hatası:', error);
-    return null;
+    // Hatayı fırlat ki UI tarafında yakalanıp gösterilebilsin
+    throw error;
   }
 };

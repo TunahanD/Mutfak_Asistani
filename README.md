@@ -44,9 +44,11 @@ Projeyi bilgisayarınıza indirmek ve çalıştırmak için aşağıdaki adımla
 
 ## 🌍 Canlı Demo
 
-*(Proje henüz canlı sunucuya deploy edilmemiştir. Kendi bilgisayarınızda çalıştırmak için yukarıdaki Kurulum adımlarını takip edebilirsiniz.)*
+Projenin canlı demosuna aşağıdaki linkten ulaşabilirsiniz:
 
-> **⚠️ Önemli Uyarı:** Güvenlik sebepleriyle, GitHub üzerindeki kaynak kodlarda Google Gemini API anahtarı **bulunmamaktadır**. Projeyi kendi lokalinizde çalıştırırken `src/services/aiService.ts` dosyasına kendi API anahtarınızı ekleyerek "Tarif Önerisi" özelliğini test edebilirsiniz.
+**[Canlı Demo Linki](https://mutfak-asistani.vercel.app/)**
+
+> **⚠️ Önemli Uyarı:** Güvenlik sebepleriyle, GitHub üzerindeki kaynak kodlarda ve canlı demoda Google Gemini API anahtarı **bulunmamaktadır**. Bu nedenle, "Tarif Önerisi" özelliği demo sürümünde çalışmayacaktır. Projeyi kendi lokalinizde çalıştırırken `src/services/aiService.ts` dosyasına kendi API anahtarınızı ekleyerek bu özelliği test edebilirsiniz.
 
 
 

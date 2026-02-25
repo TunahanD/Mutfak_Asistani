@@ -42,10 +42,6 @@ Projeyi bilgisayarınıza indirmek ve çalıştırmak için aşağıdaki adımla
 
 4.  Tarayıcınızda `http://localhost:5173` adresine giderek uygulamayı görüntüleyebilirsiniz.
 
-## 🤝 Katkıda Bulunma
 
-Her türlü katkıya açığız! Lütfen bir "Issue" açarak veya "Pull Request" göndererek katkıda bulunun.
 
-## 📄 Lisans
 
-Bu proje MIT Lisansı ile lisanslanmıştır.

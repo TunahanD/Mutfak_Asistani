@@ -6,7 +6,7 @@ import type { Product } from '../interfaces/types';
  * Güvenlik nedeniyle bu anahtarın .env dosyasında saklanması önerilir.
  * Kullanıcı tarafından manuel olarak doldurulmalıdır.
  */
-const API_KEY = 'AIzaSyDxeJMexznmHwS75UmpJQYNip7lnuKvLSk';
+const API_KEY = 'API - KEY yazılacak!';
 
 // Google Generative AI istemcisini başlat
 const genAI = new GoogleGenerativeAI(API_KEY);

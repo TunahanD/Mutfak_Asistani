@@ -9,7 +9,7 @@ function App() {
   return (
     <InventoryProvider>
       <Router>
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-amber-50 font-sans text-gray-800">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/inventory" element={<Inventory />} />

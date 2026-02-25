@@ -6,7 +6,7 @@ import type { Product } from '../interfaces/types';
  * Güvenlik nedeniyle bu anahtarın .env dosyasında saklanması önerilir.
  * Kullanıcı tarafından manuel olarak doldurulmalıdır.
  */
-const API_KEY = 'BURAYA_GEMINI_API_KEY_GELECEK';
+const API_KEY = 'AIzaSyDxeJMexznmHwS75UmpJQYNip7lnuKvLSk';
 
 // Google Generative AI istemcisini başlat
 const genAI = new GoogleGenerativeAI(API_KEY);
@@ -34,8 +34,8 @@ export const getRecipeSuggestion = async (
   type: 'çorba' | 'yemek' | 'tatlı'
 ): Promise<RecipeRecommendation | null> => {
   try {
-    // Gemini-Pro modelini seç
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    // Gemini-1.5-Flash modelini seç (Daha hızlı ve güncel)
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     // Ürün listesini metin formatına dönüştür
     const inventoryList = products
@@ -51,7 +51,7 @@ export const getRecipeSuggestion = async (
       
       Kritik Kurallar:
       1. Sadece listedeki malzemeleri kullanmaya özen göster (tuz, su, yağ gibi temel malzemeler hariç).
-      2. Yanıtı SADECE geçerli bir JSON formatında ver. Başka hiçbir açıklama ekleme.
+      2. Yanıtı SADECE geçerli bir JSON formatında ver. Başka hiçbir açıklama, önsöz veya son söz ekleme.
       3. JSON şeması şu şekilde olmalıdır:
       {
         "recipeName": "Tarif Adı",
@@ -70,8 +70,16 @@ export const getRecipeSuggestion = async (
     const response = await result.response;
     const text = response.text();
 
-    // Markdown kod bloklarını temizle (```json ... ```)
-    const jsonString = text.replace(/```json/g, '').replace(/```/g, '').trim();
+    // JSON temizleme ve parse etme
+    // İlk '{' karakterinden son '}' karakterine kadar olan kısmı al
+    const firstBrace = text.indexOf('{');
+    const lastBrace = text.lastIndexOf('}');
+    
+    if (firstBrace === -1 || lastBrace === -1) {
+      throw new Error('AI geçerli bir JSON formatı döndürmedi.');
+    }
+
+    const jsonString = text.substring(firstBrace, lastBrace + 1);
     
     // JSON'ı parse et ve döndür
     return JSON.parse(jsonString) as RecipeRecommendation;

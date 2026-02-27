@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import type { Product } from '../interfaces/types';
 
 
-const API_KEY = 'API - KEY yazılacak!';
+const API_KEY = import.meta.env.VITE_API_KEY || 'API_KEY_EKLENMELI';
 
 // Google Generative AI istemcisini başlat
 const genAI = new GoogleGenerativeAI(API_KEY);

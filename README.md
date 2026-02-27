@@ -41,6 +41,7 @@ Projeyi bilgisayarınıza indirmek ve çalıştırmak için aşağıdaki adımla
     ```
 
 4.  Tarayıcınızda `http://localhost:5173` adresine giderek uygulamayı görüntüleyebilirsiniz.
+5.  Ek olarak kodları çalıştırmadan da 'https://69a20c2a34f1e1c6a78b9481--starlit-sprinkles-f64110.netlify.app/' linkine giderek siteyi ziyaret edebilirsiniz.
 
 
 

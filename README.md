@@ -5,8 +5,8 @@ Mutfak Asistanı, dolabınızdaki malzemeleri takip etmenizi sağlayan ve bu mal
 ## 🚀 Özellikler
 
 *   **Dolap Yönetimi:** Evinizdeki malzemeleri birim (kg, lt, adet vb.) ve kategori bazında ekleyip takip edebilirsiniz.
-*   **Akıllı Stok Takibi:** Kullanılan malzemeleri stoktan otomatik düşme (Geliştirme aşamasında).
-*   **Yapay Zeka Destekli Tarif Önerisi:** Dolabınızdaki malzemelere göre size en uygun yemek, çorba veya tatlı tariflerini önerir (Geliştirme aşamasında).
+*   **Akıllı Stok Takibi:** Kullanılan malzemeleri stoktan otomatik düşme.
+*   **Yapay Zeka Destekli Tarif Önerisi:** Dolabınızdaki malzemelere göre size en uygun yemek, çorba veya tatlı tariflerini önerir.
 *   **Kalıcı Veri:** Verileriniz tarayıcınızda güvenli bir şekilde saklanır, sayfa yenilendiğinde kaybolmaz.
 
 ## 🛠️ Teknolojiler
@@ -41,14 +41,6 @@ Projeyi bilgisayarınıza indirmek ve çalıştırmak için aşağıdaki adımla
     ```
 
 4.  Tarayıcınızda `http://localhost:5173` adresine giderek uygulamayı görüntüleyebilirsiniz.
-
-## 🌍 Canlı Demo
-
-Projenin canlı demosuna aşağıdaki linkten ulaşabilirsiniz:
-
-**[Canlı Demo Linki](https://mutfak-asistani.vercel.app/)**
-
-> **⚠️ Önemli Uyarı:** Güvenlik sebepleriyle, GitHub üzerindeki kaynak kodlarda ve canlı demoda Google Gemini API anahtarı **bulunmamaktadır**. Bu nedenle, "Tarif Önerisi" özelliği demo sürümünde çalışmayacaktır. Projeyi kendi lokalinizde çalıştırırken `src/services/aiService.ts` dosyasına kendi API anahtarınızı ekleyerek bu özelliği test edebilirsiniz.
 
 
 
